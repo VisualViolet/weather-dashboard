@@ -4,7 +4,19 @@
     
 }
 
-body {
-    background-color: #adb6c4;
+header {
+    background-color: #5d576b;
 }
 
+
+.custom-btn {
+    background-color: #d496a7;
+}
+
+.card {
+    background-color: #f1dede;
+}
+
+.col {
+    background-color: #5d576b;
+}
