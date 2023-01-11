@@ -40,6 +40,8 @@ function getWeather(){
         })
         .then(function(data){
             var forecastDays = document.querySelectorAll(".col");
+            var city = data.city.name;
+
             for (let i = 0; i < forecastDays.length; i++) {
                 forecastDays[i].innerHTML = "";
                 var forecastDataIndex = i * 8 + 2;
@@ -74,11 +76,32 @@ function getWeather(){
                 forecastDays[i].append(forecastHumidityEl);
 
             }
+            createHistoryBtn(city);
         })
+
+        function createHistoryBtn(city){
+            var historyBtn = document.createElement("btn");
+            historyBtn.setAttribute("type", "button");
+            historyBtn.setAttribute("class", "btn custom-btn mt-2 history");
+            historyBtn.textContent = city;
+            citySearchEl.append(historyBtn);
+        }
+
+        
     })
 }
 
+function retrieveHistory() {
+    alert("Yay, we work!");
+}
+
 searchBtn.addEventListener('click', getWeather);
+document.getElementById("search-city").addEventListener('click', function(e){
+    if(e.target.classList.contains("history"))
+    {
+        retrieveHistory();
+    }
+});
 
 
 
