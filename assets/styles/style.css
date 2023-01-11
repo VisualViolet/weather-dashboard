@@ -13,10 +13,20 @@ header {
     background-color: #d496a7;
 }
 
+.custom-btn:hover {
+    background-color: #6cd4ff;
+}
+
+.custom-btn:active {
+    transform: translateY(4px);
+}
+
 .card {
     background-color: #f1dede;
 }
 
 .col {
     background-color: #5d576b;
+    color: white;
+    text-align: left;
 }
