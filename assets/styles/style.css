@@ -33,6 +33,7 @@ header {
     background-color: #5d576b;
     color: white;
     text-align: left;
+    border-radius: 5px;
 }
 
 .history {

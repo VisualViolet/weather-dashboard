@@ -112,16 +112,24 @@ function getWeather(city = document.getElementById("city-input").value){
 }
 
 // Creates a button with a value of searched city
-function createHistoryBtn(){//city
+function createHistoryBtn(){
     var city = document.getElementById("city-input").value;
-    var historyBtn = document.createElement("btn");
-    historyBtn.setAttribute("type", "button");
-    historyBtn.setAttribute("class", "btn custom-btn mt-2 history");
-    historyBtn.textContent = city;
-    historyList.append(historyBtn);
-
-    // Save to local storage
-    saveHistory(city);
+    var requestURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=" + unit + "&appid=" + apiKey;
+    fetch(requestURL)
+    // prevents button from being generated if invalid city
+    .then(function(response){
+        if (response.ok === true)
+        {
+            var historyBtn = document.createElement("btn");
+            historyBtn.setAttribute("type", "button");
+            historyBtn.setAttribute("class", "btn custom-btn mt-2 history");
+            historyBtn.textContent = city;
+            historyList.append(historyBtn);
+        
+            // Save to local storage
+            saveHistory(city);     
+        }
+    })
 
 
 }
