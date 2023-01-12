@@ -1,3 +1,4 @@
+// Global variables and element selectors
 const apiKey = "77eba3c9ab156265150188630611d486";
 const unit = "imperial";
 var currentDate = (new Date()).toLocaleDateString('en-US');
@@ -12,9 +13,10 @@ const windEl = document.getElementById("wind");
 const humidityEl = document.getElementById("humidity");
 const historyList = document.getElementById("history-list");
 
-
+// Displays history from local storage on load
 displayHistory();
 
+// Displays error if API returns a 404 error, otherwise gets weather information
 function checkLocation(){
     var city = document.getElementById("city-input").value;
     var requestURL = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=" + unit + "&appid=" + apiKey;
@@ -31,14 +33,17 @@ function checkLocation(){
     })
 }
 
+// function that gets current weather and 5 day forecast with optional parameter
 function getWeather(city = document.getElementById("city-input").value){
     var cityInput = city
+    // current weather API call
     var requestURL = "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&units=" + unit + "&appid=" + apiKey;
     fetch(requestURL)
     .then(function(response){
         return response.json()
     })
     .then(function(data){
+        // Display data to page
         var city = (data.name);
         var temperature = (data.main.temp);
         var wind = (data.wind.speed);
@@ -53,17 +58,19 @@ function getWeather(city = document.getElementById("city-input").value){
         humidityEl.innerHTML = ("Humidity: " + humidity);
 
         
-
+        // 5 day forecast API call
         requestURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=" + unit + "&appid=" + apiKey;
         fetch(requestURL)
         .then(function(response){
             return response.json()
         })
         .then(function(data){
+            //Display data to page
             var forecastDays = document.querySelectorAll(".col");
 
             for (let i = 0; i < forecastDays.length; i++) {
                 forecastDays[i].innerHTML = "";
+                // forecastDataIndex ensures we get values from different days at the same time
                 var forecastDataIndex = i * 8 + 4;
 
                 var forecastDate = new Date();
@@ -97,12 +104,14 @@ function getWeather(city = document.getElementById("city-input").value){
 
             }
         })
+        // Function call for history button listener
         .then(function(){
             btnListener();
         })
     })
 }
 
+// Creates a button with a value of searched city
 function createHistoryBtn(){//city
     var city = document.getElementById("city-input").value;
     var historyBtn = document.createElement("btn");
@@ -111,11 +120,13 @@ function createHistoryBtn(){//city
     historyBtn.textContent = city;
     historyList.append(historyBtn);
 
-    // Save to Local here -- pulling exsisting list and appending
+    // Save to local storage
     saveHistory(city);
 
 
 }
+
+// Button listener for history buttons in function since they are created dynamically
 function btnListener(){
     var btns = document.querySelectorAll(".history");
     for (i of btns){
@@ -123,17 +134,20 @@ function btnListener(){
     }
 }
 
+// Redisplays weather for city on history button click
 function weatherBtnHistory(event) {
     const buttonClicked = event.target;
     getWeather(buttonClicked.textContent);
 }
 
+// Retrieves searches and saves them to local storage
 function saveHistory(city) {
     retrieveStoredHistory();
     searchedCities.push(city);
     localStorage.setItem("cities", JSON.stringify(searchedCities));
 }
 
+// Checks if history is null and adds searched cities to history
 function retrieveStoredHistory(){
     var retrievedHistory = JSON.parse(localStorage.getItem("cities"));
     if (retrievedHistory != null && retrievedHistory.length > 0) {
@@ -141,6 +155,7 @@ function retrieveStoredHistory(){
     }
 }
 
+// Creates and displays history buttons from local storage
 function displayHistory(){
     retrieveStoredHistory();
     searchedCities.forEach((item)=>{
@@ -153,6 +168,7 @@ function displayHistory(){
     btnListener();
 }
 
+// Clears local storage when button is clicked and removes history buttons
 function clearHistory(){
     localStorage.clear();
     var historyBtns = document.querySelectorAll("#history-list");
@@ -161,21 +177,11 @@ function clearHistory(){
     }
 }
 
+// Runs error check and creates history button when search button is clicked
 searchBtn.addEventListener('click',function(){
     checkLocation();
     createHistoryBtn();
 });
 
+// Event listener for clear history button
 clearBtn.addEventListener('click', clearHistory);
-
-
-/*
-
-            var Testbtns = document.querySelectorAll(".history");
-            alert(Testbtns.length);
-            if (Testbtns.length > 0) {
-                for (i of btns){
-                    i.addEventListener("click", retrieveHistory)
-                }
-            }
-*/

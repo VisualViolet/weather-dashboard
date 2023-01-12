@@ -13,12 +13,16 @@ header {
     background-color: #d496a7;
 }
 
-.custom-btn:hover {
+.custom-btn:hover, .clear-btn:hover {
     background-color: #6cd4ff;
 }
 
-.custom-btn:active {
+.custom-btn:active, .clear-btn:active {
     transform: translateY(4px);
+}
+
+.clear-btn {
+    background-color: #11b8ff;
 }
 
 .card {
