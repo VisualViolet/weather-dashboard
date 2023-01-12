@@ -118,7 +118,7 @@ function createHistoryBtn(){
     fetch(requestURL)
     // prevents button from being generated if invalid city
     .then(function(response){
-        if (response.ok === true)
+        if (response.ok === true && !searchedCities.includes(city))
         {
             var historyBtn = document.createElement("btn");
             historyBtn.setAttribute("type", "button");
@@ -130,7 +130,6 @@ function createHistoryBtn(){
             saveHistory(city);     
         }
     })
-
 
 }
 
