@@ -4,7 +4,7 @@
 
 This weather dashboard application allows a user enter a city name and retrieve the current weather and five day forecast on the same screen! Searches are saved and users may click a history button to display weather information again for that city. Saved searches may also be cleared. This application uses the Weather API - Open Weather Map to retrieve weather data that is displayed to the page using JavaScript and styled/designed by Bootstrap and CSS. In building this application, I've learned how to implement API calls into my webpages using JavaScripts fetch function to display data. This opens up new possibilities in my development as I can now bring applications together to share data.
 
-![live demo of the weather dashboard application]()
+![live demo of the weather dashboard application](https://github.com/VisualViolet/weather-dashboard/blob/main/assets/images/weather-dashboard-demo.gif)
 
 ## Installation
 
