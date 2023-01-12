@@ -8,7 +8,7 @@ This weather dashboard application allows a user enter a city name and retrieve 
 
 ## Installation
 
-No installation is necessary! Please view the link to my deployed application here: . Please email me to report bugs or offer suggestions for improvement.
+No installation is necessary! Please view the link to my deployed application here: https://visualviolet.github.io/weather-dashboard/ . Please email me to report bugs or offer suggestions for improvement.
 
 ## Usage
 
